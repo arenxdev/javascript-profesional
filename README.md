@@ -250,3 +250,22 @@ Javascript se organiza usando las siguientes estructuras de datos:
 El Event Loop es un loop que está ejecutando todo el tiempo y pasa periódicamente revisando las queues y el stack moviendo tareas entre estas dos estructuras.
 
 ![Event Loop](./assets/images/EventLoop.png)
+
+## FUNSAMENTOS INTERMEDIOS
+
+### Promesas
+
+Para crear las promesas usamos la clase Promise. El constructor de Promise recibe un sólo argumento, un callback con dos parámetros, resolve y reject. resolve es la función a ejecutar cuando se resuelve y reject cuando se rechaza.
+
+El async/await es sólo syntax sugar de una promesa, por debajo es exactamente lo mismo.
+
+La clase Promise tiene algunos métodos estáticos bastante útiles:
+
+- Promise.all. Da error si una de las promesas es rechazada.
+- Promise.race. Regresa sólo la promesa que se resuelva primero.
+
+### Getters y setters
+
+Los getters y setters son funciones que podemos usar en un objeto para tener propiedades virtuales. Se usan los keywords set y get para crear estas propiedades.
+
+Estas propiedades al ser funciones pueden llevar una validación de por medio y ser usadas con el operador de asignación como si fueran una variable más dentro del objeto.
