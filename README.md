@@ -118,3 +118,135 @@ Por default los objetos en JavaScript tienen cómo prototipo a **Object** que es
 Cuando se llama a una función o variable que no se encuentra en el mismo objeto que la llamó, se busca en toda la prototype chain hasta encontrarla o regresar undefined.
 
 La función **hasOwnProperty** sirve para verificar si una propiedad es parte del objeto o si viene heredada desde su prototype chain.
+
+## ¿CÓMO FUNCIONA JAVASCRIPT?
+
+### Parsers y el Abstract Syntax Tree
+
+- ¿Qué hace un JS Engine?
+
+1. Recibe un código fuente.
+2. Parsea el código y produce un Abstract Syntax Tree (AST).
+3. Se compila a bytecode y se ejecuta.
+4. Se optimiza a machine code y se reemplaza el código base.
+
+![JS Engine](./assets/images/JSEngine.png)
+
+¿Qué hace un parser?
+
+![Parser](./assets/images/parser.png)
+
+Un **SyntaxError** es lanzado cuando el motor de JavaScript se encuentra con partes de código que o forman parte de la sintaxis del lenguaje al momento de analizar el código.
+
+- Google dice:
+
+1. Parsing es 15-20% del proceso de ejecución.
+2. La mayoría de JavaScript en una página nunca se ejecuta.
+3. Esto hace que **building y code splitting** sea muy importante.
+
+- Parser de VO:
+
+![Parser de V8](./assets/images/parser.png)
+
+¿Qué es el AST (Abstract Syntax Tree)
+
+Es un grafo (estructura de datos) que representa un programa.
+
+Se usa en:
+
+- JavaScript Engine.
+- Bundlers: Webpack, Rollup, Parcel.
+- Transpilers: Babel.
+- Linters: ESLint, Prettify.
+- Type Checkers: TypeScript, Flow.
+- Syntax Highlighters.
+
+El JS Engine recibe el código fuente y lo procesa de la siguiente manera:
+
+1. El parser descompone y crea tokens que integran el AST.
+2. Se compila a bytecode y se ejecuta.
+3. Lo que se pueda se optimiza a machine code y se reemplaza el código base.
+
+Un SyntaxError es lanzado cuando el motor JavaScript encuentra partes que no forman parte de la sintaxis del lenguaje y esto lo logra gracias a que se tiene un AST generado por el parser.
+
+El parser es del 15% al 20% del proceso de ejecución por lo que hay que usar parser del código justo en el momento que lo necesitamos y no antes de saber si se va a usar o no.
+
+### Práctica AST
+
+![AST](./assets/images/practica-ast.png)
+
+```javascript
+export default function(context) {
+  return {
+    VariableDeclaration(node) {
+      // tipo de variable const
+      if (node.kind === 'const') {
+        const declaration = node.declarations[0];
+        // Asegurarnos que el valor es un número
+        if (typeof declaration.init.value === 'number') {
+          if (declaration.id.name !== declaration.id.name.toUpperCase()) {
+            context.report({
+              node: declaration.id,
+              message: 'El nombre de la constante debe estar en mayúsculas',
+              fix: function(fixer) {
+                return fixer.replaceText(declaration.id, declaration.id.name.toUpperCase());
+              }
+            });
+          }
+        }
+      }
+    }
+  };
+};
+
+```
+
+### Cómo funciona el JavaScript Engine
+
+Una vez tenemos el **AST** ahora hay que convertirlo a Bytecode.
+
+**Bytecode** es como el código assembler pero en lugar de operar en el procesador opera en la máquina virtual **V8** del navegador.
+
+Machine code es el más bajo nivel, es código binario que va directo al procesador.
+
+El **profiler** se sitúa en medio del bytecode y el optimizador
+
+Cada máquina virtual tiene sus particularidades, por ejemplo V8 tiene algo llamado Hot Functions.
+
+Cuando una sentencia función es ejecutada muy frecuentemente, V8 la denomina como una hot function y hace una optimización que consiste en convertirla a machine code para no tener que interpretarla de nuevo y agilizar su ejecución.
+
+Cada navegador tiene su implementación de JavaScript Engine:
+
+- SpiderMonkey - Firefox: 2 capas de optimizacipon.
+- Chackra - Edge: 2 capas de optimización.
+- JavaScriptCore - Safari: 3 capas de optimización.
+- V8 - Chrome
+
+¿Qué hace el JS Engine?
+
+1. Recibe código fuente.
+2. Parsea el código y produce un AST (Abstract Syntax Tree).
+3. Se compila a bytecode y se ejecuta.
+4. Se optimiza el machine code y se reemplaza el código base.
+
+| Bytecode                         | Machine Code                                            |
+|----------------------------------|---------------------------------------------------------|
+| Código parecido a assembly       | Binario                                                 |
+| Portatil                         | Instruccioes specíficas a una arquitectura o procesador |
+| Ejecutado por una virtua machine |                                                         |
+
+### Event Loop
+
+El **Event Loop** hace que Javascript parezca ser **multihilo** a pesar de que corre en un solo proceso.
+
+Javascript se organiza usando las siguientes estructuras de datos:
+
+- Stack. Va apilando de forma organizada las diferentes instrucciones que se llaman. Lleva así un rastro de dónde está el programa, en que punto de ejecución nos encontramos.
+- Memory Heap. De forma desorganizada se guarda información de las variables y del scope.
+- Schedule Tasks. Aquí se agregan a la cola, las tareas programadas para su ejecución.
+- Task Queue. Aquí se agregan las tareas que ya están listas para pasar al stack y ser ejecutadas. El stack debe estar vacío para que esto suceda.
+- MicroTask Queue. Aquí se agregan las promesas. Esta Queue es la que tiene mayor prioridad.
+
+El Event Loop es un loop que está ejecutando todo el tiempo y pasa periódicamente revisando las queues y el stack moviendo tareas entre estas dos estructuras.
+
+![Event Loop](./assets/images/EventLoop.png)
