@@ -286,3 +286,29 @@ Algunas de sus características:
 - Empiezan suspendidos y se tiene que llamar next para que ejecuten.
 - Regresan un value y un boolean done que define si ya terminaron.
 - __yield__ es la instrucción que regresa un valor cada vez que llamamos a next y detiene la ejecución del generador.
+
+## APIS DEL DOM
+
+### Fetch - Cómo cancelar peticiones
+
+La peticiones AJAX permitieron en su tiempo hacer peticiones asíncronas al servidor sin tener que detener la carga de la página. Hoy en día se utiliza la función **fetch** para esto.
+
+Con **fetch** tenemos algo llamado **AbortController** que nos permite enviar una señal a una petición en plena ejecución para detenerla.
+
+### IntersectionObserver
+
+Sirve para observar elementos y si cruzan un umbral que nosotros definimos nos lo va a notificar para tomar acción.
+
+El umbral se define por el porcentaje que tiene intersección con el viewport, con la parte visible de nuestra página.
+
+### VisibilityChange
+
+El **visibilityChange** forma parte del API del DOM llamado **Page Visibility** y nos deja saber si el elemento es visible, pude ser usado para ejecutar una acción cuando cambiamos de pestaña. Así podemos ahorrar batería y mejorar la UX.
+
+### Service Workers
+
+Sirven para hacer que nuestras aplicaciones funcionen Offline.
+
+Muy usados en las **Progressive Web Apps** (PWA) los ServiceWorkers son una capa que vive entre el navegador y el Internet.
+
+Parecido a como lo hacen los proxys van a interceptar peticiones para guardar el resultado en cache y la próxima vez que se haga la petición tomar del cache ese resultado.
