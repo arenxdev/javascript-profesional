@@ -312,3 +312,36 @@ Sirven para hacer que nuestras aplicaciones funcionen Offline.
 Muy usados en las **Progressive Web Apps** (PWA) los ServiceWorkers son una capa que vive entre el navegador y el Internet.
 
 Parecido a como lo hacen los proxys van a interceptar peticiones para guardar el resultado en cache y la próxima vez que se haga la petición tomar del cache ese resultado.
+
+## TYPESCRIPT
+
+### Introducción
+
+**TypeScript** es un superset de JavaScript que añade tipos a nuestras variables ayudando así a la detección de errores de forma temprana y mejorando el autocompletado.
+
+Los navegadores no entienden TypeScript así que lo vamos a transpilar a JavaScript usando Parcel.
+
+### Tipos básicos
+
+Tipos:
+
+- boolean. Valor verdadero o falso.
+- number. Números.
+- string. Cadenas de texto.
+- string[]. Arreglo del tipo cadena de texto.
+- Array. Arreglo multi-tipo, acepta cadenas de texto o números.
+- enum. Es un tipo especial llamado enumeración.
+- any. Cualquier tipo.
+- object. Del tipo objeto.
+
+### Funciones
+
+En Typescript podemos ser explícitos con el tipo de los argumentos y el tipo de retorno de una función.
+
+### Interfaces
+
+Nos permiten declarar la forma exacta de un objeto, definiendo los tipos de sus propiedades y si son opcionales o no.
+
+### Clases
+
+En las clases en TypeScript sí existen las propiedades privadas.
