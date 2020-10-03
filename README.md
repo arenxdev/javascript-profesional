@@ -345,3 +345,145 @@ Nos permiten declarar la forma exacta de un objeto, definiendo los tipos de sus 
 ### Clases
 
 En las clases en TypeScript sí existen las propiedades privadas.
+
+## PATRONES DE DISEÑO
+
+### Qué es un patrón de diseño
+
+Son soluciones generales ya probadas dentro de un contexto que las limita a problemas frecuentes que nos encontramos en el desarrollo de software.
+
+- El contexto es la situación donde el patrón aplica.
+- Esta situación debe ser recurrente.
+- Ejemplo: Muchos objetos están interesados en el estado de otro objeto.
+
+- Se refiere a la meta que estás tratando de alcanzar dentro del contexto.
+- El problema incluye todas las limitaciones que existen dentro de este contexto.
+- Ejemplo: Estos objetos quieren recibir notificaciones cuando cambie el estado sin tener que solicitar la información.
+
+- Un diseño **genérico** que alcanza a la meta dentro del contexto.
+- Ejemplo: Crear una clase donde cualquier objeto se pueda suscribir y descubrir a cambios en el estado.
+
+> El ejemplo dictado corresponde al patrón __observer pattern__.
+
+No corresponden a patrones de diseño:
+
+Every Layour
+¿Cómo acomodar elementos?
+
+Media Queries
+¿Cómo acomodar la información para diferentes tipos de pantalla?
+
+#### Un poco de historia
+
+La idea de los patrones comienza en la arquitectura con **Christopher Alexander**.
+
+Sus libros describen patrones para construir arquitectura dinámica como casas, pueblos y ciudades.
+
+El libro que comenzó el campo de patrones de diseño de sotware se llama __Design Patterns__, fue publicado en 1995 y describe los patrones fundamentales.
+
+#### Beneficios
+
+- Los patrones de diseño son una caja de herramientas de soluciones bien probadas a problemas comunes en diseño de software.
+- Provee un lenguaje común que permite una comunicación específica y eificiente.
+
+#### Crítica
+
+- Los patrones de diseño son una forma de complejidad.
+- Son souciones a las limitaciones de un lenguaje de programación. Ejemplo: `Java o C# no tienen funciones de alto nivel`.
+
+### Categorías de patrones de diseño
+
+
+#### Patrones Creacionales
+
+Provee diferentes mecanismos para crear objetos.
+
+1. Abstract Factory.
+2. Builder:
+
+   Es usado para __permitir la creación de una varidad de objetos complejos desde un objeto fuente__.
+
+   Separa la creación de un objeto compejo de su estructura, de tal forma que el mismo proceso de construcción puede servir para crear representaciones diferentes.
+
+3. Factory Method.
+4. Prototype.
+5. Singleton.
+
+#### Patrones Estructurales
+
+Describen formas de componer objetos para formar nuevas estructuras flexibles y eficientes.
+
+1. Adapter: expone una interfaz externa y esconde una interfaz interna que puede ser compleja.
+2. Bridge.
+3. Composite.
+4. Decorator.
+5. Facade.
+6. Flyweight.
+7. Proxy: intercepta llamadas a objetos para realizar un proceso previo.
+
+#### Patrones de Comportamiento
+
+Gestionan algoritmos y responsabilidades entre objetos.
+
+1. Chain of Responsability.
+2. Command.
+3. Interpreter.
+4. Iterator.
+5. Mediator.
+6. Memento.
+7. Observer: un objeto le pasa el estado interno a muchos objetos que están interesados.
+8. State.v
+9. Strategy.
+10. Template Method.
+11. Visitor.
+
+### Patrón Singleton y Casos de Uso
+
+Es un patrón que te asegura que una clase solo tiene una instancia. Esta única instancia puede ser consumida por cualquier otro objeto.
+
+![Singleton](./assets/images/singleton.png)
+
+#### Una analogía
+
+El gobierno de tu áís.
+
+Podrán haber varios partidos, pero un sólo gobierno.
+
+Por ejemplo, el __Gobierno de Alpha Centauri__ es un punto de acceso global que identifica un grupo de personas a cargo.
+
+#### Mongoose
+
+Mongoose es una librería que ayuda a interactuar con una base de datos de MongoDB. Provee una interfaz simple para buscar, escribir y validar datos.
+
+En este etipo de librerías sólo se quiere tener una instancia.
+
+### ¿Cómo funciona el Patrón Observer?
+
+En esta clase Richard Kaufman, tu profesor en el Curso profesional de JavaScript, nos explica el funcionamiento del patrón observer y como implementarlo.
+
+El patrón observer se compone de un sujeto que ofrece mecanismos de suscripción y desuscripción a múltiples observadores que quieren ser notificados de los cambios en dicho sujeto. Cada observador expone un método de update que es usado por el sujeto para notificar cualquier cambio a todos los suscritos.
+
+Es uno de los patrones más utilizados, algunos ejemplos típicos son:
+
+- Newsletter.
+- Sockets.
+- Listeners en páginas web.
+
+### Caso de uso del patrón Observer: Redux
+
+- Librería de manejo de estado.
+- Se inicializa un store con un estado y un reducer.
+- Se despachan acciones que modifican el estado.
+- El store notifica que el estado cambio.
+
+### Patrón Decorator
+
+Añade nuevas responsabilidades a un objeto de forma dinámica permitiendo así extender su funcionalidad sin tener que usar subclases.
+
+#### Decorator
+
+- Añade nuevas responsabilidades a un objeto de forma dinámica.
+- Nos permite extender funcionalidad sin tener que usar subclases.
+
+#### Implementación del patrón
+
